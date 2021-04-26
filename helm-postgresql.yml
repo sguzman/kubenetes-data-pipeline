@@ -4,7 +4,7 @@
 ##
 global:
   postgresql: {
-      postgresqlDatabase: duolingo
+      #postgresqlDatabase: duolingo
   }
 #   imageRegistry: myRegistryName
 #   imagePullSecrets:
