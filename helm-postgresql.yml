@@ -3,9 +3,8 @@
 ## Current available global Docker image parameters: imageRegistry and imagePullSecrets
 ##
 global:
-  postgresql: {
-      #postgresqlDatabase: duolingo
-  }
+  postgresql: {}
+
 #   imageRegistry: myRegistryName
 #   imagePullSecrets:
 #     - myRegistryKeySecretName
@@ -231,9 +230,10 @@ pgHbaConfiguration: |-
 ## Alternatively, you can put your scripts under the files/docker-entrypoint-initdb.d directory
 ##
 initdbScripts:
-  my_init_script.sh: |
-     #!/bin/sh
-     echo "Do something."
+  01-init.sql: |
+      CREATE SCHEMA data;
+      CREATE SCHEMA ts;
+      SET TIME ZONE 'PST8PDT';
 
 ## ConfigMap with scripts to be run at first boot
 ## NOTE: This will override initdbScripts
@@ -253,13 +253,13 @@ initdbPassword: admin
 audit:
   ## Log client hostnames
   ##
-  logHostname: false
+  logHostname: true
   ## Log connections to the server
   ##
-  logConnections: false
+  logConnections: true
   ## Log disconnections
   ##
-  logDisconnections: false
+  logDisconnections: true
   ## Operation to audit using pgAudit (default if not set)
   ##
   pgAuditLog: ""
