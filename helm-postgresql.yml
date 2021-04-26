@@ -3,7 +3,9 @@
 ## Current available global Docker image parameters: imageRegistry and imagePullSecrets
 ##
 global:
-  postgresql: {}
+  postgresql: {
+      postgresqlDatabase: duolingo
+  }
 #   imageRegistry: myRegistryName
 #   imagePullSecrets:
 #     - myRegistryKeySecretName
@@ -126,11 +128,11 @@ replication:
   numSynchronousReplicas: 0
   ## Replication Cluster application name. Useful for defining multiple replication policies
   ##
-  applicationName: my_application
+  applicationName: duolingo
 
 ## PostgreSQL admin password (used when `postgresqlUsername` is not `postgres`)
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-user-on-first-run (see note!)
-# postgresqlPostgresPassword:
+postgresqlPostgresPassword: admin
 
 ## PostgreSQL user (has superuser privileges if username is `postgres`)
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#setting-the-root-password-on-first-run
@@ -211,8 +213,8 @@ primaryAsStandBy:
 ## Default: do not create pg_hba.conf
 ## Alternatively, you can put your pg_hba.conf under the files/ directory
 pgHbaConfiguration: |-
-    host all all 0.0.0.0/0 md5
     host all all 0.0.0.0/0 trust
+    host all all 0.0.0.0/0 md5
 #   local all all trust
 #   host all all localhost trust
 #   host mydatabase mysuser 192.168.0.0/24 md5
@@ -228,10 +230,10 @@ pgHbaConfiguration: |-
 ## Specify dictionary of scripts to be run at first boot
 ## Alternatively, you can put your scripts under the files/docker-entrypoint-initdb.d directory
 ##
-# initdbScripts:
-#   my_init_script.sh: |
-#      #!/bin/sh
-#      echo "Do something."
+initdbScripts:
+  my_init_script.sh: |
+     #!/bin/sh
+     echo "Do something."
 
 ## ConfigMap with scripts to be run at first boot
 ## NOTE: This will override initdbScripts
@@ -242,8 +244,8 @@ pgHbaConfiguration: |-
 # initdbScriptsSecret:
 
 ## Specify the PostgreSQL username and password to execute the initdb scripts
-#initdbUser: "admin"
-#initdbPassword: "admin"
+initdbUser: postgres
+initdbPassword: admin
 
 ## Audit settings
 ## https://github.com/bitnami/bitnami-docker-postgresql#auditing
