@@ -32,7 +32,12 @@ image:
   ## Set to true if you would like to see extra information on logs
   ## It turns BASH and/or NAMI debugging in the image
   ##
-  debug: false
+  debug: true
+
+  securityContext:
+    enabled: true
+    runAsUser: 1001
+    fsGroup: 1000
 
 ## String to partially override common.names.fullname template (will maintain the release name)
 ##
@@ -47,7 +52,7 @@ image:
 ## volumePermissions: Change the owner of the persist volume mountpoint to RunAsUser:fsGroup
 ##
 volumePermissions:
-  enabled: false
+  enabled: true
   image:
     registry: docker.io
     repository: bitnami/bitnami-shell
@@ -230,7 +235,7 @@ pgHbaConfiguration: |-
 ## Alternatively, you can put your scripts under the files/docker-entrypoint-initdb.d directory
 ##
 initdbScripts:
-  01-init.sql: |
+  01-init.sql: |-
       CREATE SCHEMA data;
       CREATE SCHEMA ts;
       SET TIME ZONE 'PST8PDT';
@@ -393,7 +398,7 @@ persistence:
   ## If defined, PVC must be created manually before volume will be bound
   ## The value is evaluated as a template, so, for example, the name can depend on .Release or .Chart
   ##
-  # existingClaim:
+  existingClaim: pvc-pg
 
   ## The path the volume will be mounted at, useful when using different
   ## PostgreSQL images.
@@ -628,8 +633,8 @@ readReplicas:
 ##
 resources:
   requests:
-    memory: 256Mi
-    cpu: 250m
+    memory: 1024Mi
+    cpu: 1000m
 
 ## Add annotations to all the deployed resources
 ##
