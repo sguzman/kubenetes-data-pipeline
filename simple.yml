@@ -30,8 +30,7 @@ initdbScripts:
 initdbUser: postgres
 initdbPassword: admin
 persistence:
-  #existingClaim: pvc-pg
-  size: 100Gi
+  existingClaim: pvc-pg
 resources:
   requests:
     memory: 5024Mi
