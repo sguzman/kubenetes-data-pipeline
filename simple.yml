@@ -25,12 +25,22 @@ audit:
   logTimezone: America/Los_Angeles
 initdbScripts:
   01-init.sql: |-
-      CREATE SCHEMA data;
-      CREATE SCHEMA ts;
+    CREATE SCHEMA data;
+    CREATE SCHEMA ts;
+  02-users.sql: |-
+    create table duolingo.data.users (
+      insert_id SERIAL NOT NULL PRIMARY KEY,
+      insert_time TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      id BIGINT NOT NULL UNIQUE,
+      username text NOT NULL
+    );
+  03-init-users.sql: |-
+    INSERT INTO duolingo.data.users (id, username) VALUES (323233417, 'its_me_sguzman');
 initdbUser: postgres
 initdbPassword: admin
 persistence:
-  existingClaim: pvc-pg
+  #existingClaim: pvc-pg
+  size: 100Gi
 resources:
   requests:
     memory: 5024Mi
