@@ -1,0 +1,42 @@
+global:
+  postgresql:
+    postgresqlDatabase: duolingo
+    postgresqlUsername: postgres
+    postgresqlPassword: admin
+postgresqlDatabase: duolingo
+postgresqlUsername: postgres
+postgresqlPassword: admin
+postgresqlPostgresPassword: admin
+postgresqlExtendedConf:
+    listenAddresses: "*"
+volumePermissions:
+  enabled: true
+image:
+  debug: true
+pgHbaConfiguration: |-
+    local all all trust    
+    host all all all trust
+    host all all all md5
+audit:
+  logHostname: true
+  logConnections: true
+  logDisconnections: true
+  logTimezone: America/Los_Angeles
+#initdbScripts:
+#  01-init.sql: |-
+#      CREATE SCHEMA data;
+#      CREATE SCHEMA ts;
+#      SET TIME ZONE 'PST8PDT';
+initdbUser: postgres
+initdbPassword: admin
+persistence:
+  #existingClaim: pvc-pg
+  size: 100Gi
+resources:
+  requests:
+    memory: 1024Mi
+    cpu: 1000m
+securityContext:
+    enabled: true
+    runAsUser: 0
+    fsGroup: 0
