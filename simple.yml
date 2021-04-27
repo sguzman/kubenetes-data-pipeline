@@ -9,6 +9,7 @@ postgresqlPassword: admin
 postgresqlPostgresPassword: admin
 postgresqlExtendedConf:
     listenAddresses: "*"
+    timezone: America/Los_Angeles
 volumePermissions:
   enabled: true
 image:
@@ -22,11 +23,10 @@ audit:
   logConnections: true
   logDisconnections: true
   logTimezone: America/Los_Angeles
-#initdbScripts:
-#  01-init.sql: |-
-#      CREATE SCHEMA data;
-#      CREATE SCHEMA ts;
-#      SET TIME ZONE 'PST8PDT';
+initdbScripts:
+  01-init.sql: |-
+      CREATE SCHEMA data;
+      CREATE SCHEMA ts;
 initdbUser: postgres
 initdbPassword: admin
 persistence:
@@ -34,7 +34,7 @@ persistence:
   size: 100Gi
 resources:
   requests:
-    memory: 1024Mi
+    memory: 5024Mi
     cpu: 1000m
 securityContext:
     enabled: true
