@@ -1,0 +1,28 @@
+fullnameOverride: mongodb
+image:
+  debug: true
+archicture: standalone
+auth:
+  enabled: true
+  rootPassword: admin
+  username: admin
+  password: admin
+  database: duolingo
+enableIPv6: true
+directoryPerDB: true
+systemLogVerbosity: 1
+tls:
+  enabled: false
+initdbScripts:
+  01-init.js: |-
+    use duolingo;
+persistence:
+  size: 100Gi
+resources:
+  requests:
+    memory: 5024Mi
+    cpu: 1000m
+securityContext:
+    enabled: true
+    runAsUser: 0
+    fsGroup: 0
