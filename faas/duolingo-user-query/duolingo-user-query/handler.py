@@ -11,7 +11,6 @@ def handle(req):
 
     js = json.loads(req)
     user = js["user"]
-    print(user)
     obj = duo_data.get_user(user)
 
     return json.dumps(obj)
