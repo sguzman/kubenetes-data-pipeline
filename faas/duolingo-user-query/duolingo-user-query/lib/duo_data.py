@@ -106,4 +106,4 @@ class User:
 
 def get_user(user):
     ws = User(user)
-    data = ws.all()
+    return ws.all()
