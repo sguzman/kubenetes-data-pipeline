@@ -5,7 +5,7 @@ import random
 import time
 import typing
 
-from . import duolingo
+from duo import duolingo
 
 fr_type = typing.List[typing.Dict[str, list]]
 lo_type = typing.Optional[typing.List[str]]
@@ -107,3 +107,5 @@ class User:
 def get_user(user):
     ws = User(user)
     return ws.all()
+
+get_user('its_me_sguzman')
