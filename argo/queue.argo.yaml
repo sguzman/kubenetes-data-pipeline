@@ -15,7 +15,7 @@ spec:
         arguments:
           parameters:
             - name: data
-              value: {{steps.get-users.outputs.parameters.user-list}}
+              value: "{{steps.get-users.outputs.parameters.user-list}}"
 
   - name: curly
     container:
