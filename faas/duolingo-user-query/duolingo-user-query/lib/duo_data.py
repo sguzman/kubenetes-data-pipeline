@@ -5,7 +5,7 @@ import random
 import time
 import typing
 
-from lib import duolingo
+from . import duolingo
 
 fr_type = typing.List[typing.Dict[str, list]]
 lo_type = typing.Optional[typing.List[str]]
