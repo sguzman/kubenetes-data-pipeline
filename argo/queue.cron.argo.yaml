@@ -1,38 +1,45 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Workflow
 metadata:
   generateName: user-queue
+  labels:
+    type: 'cron'
 spec:
-  entrypoint: A
-  templates:
-  - name: A
-    steps:
-    - - name: get-users
-        template: curly
+  schedule: '* * * * *'
+  workflowSpec:
+    ttlStrategy:
+      secondsAfterCompletion: 300
+    podGC:
+      strategy: OnPodCompletion
 
-    - - name: insert-users
-        template: curly-data
-        arguments:
-          parameters:
-            - name: data
-              value: "{{steps.get-users.outputs.parameters.user-list}}"
+    entrypoint: A
+    templates:
+    - name: A
+      steps:
+      - - name: get-users
+          template: curly
 
-  - name: curly
-    container:
-      image: curlimages/curl:latest
-      command: [sh, -c]
-      args: ["curl -sq http://192.168.49.2:31112/function/users > /tmp/out.json"]
-    outputs:
-      parameters:
-      - name: user-list
-        valueFrom:
-          path: /tmp/out.json
+      - - name: insert-users
+          template: curly-data
+          arguments:
+            parameters:
+              - name: data
+                value: "{{steps.get-users.outputs.parameters.user-list}}"
 
-  - name: curly-data
-    inputs:
-      parameters:
-      - name: data
-    container:
-      image: curlimages/curl:latest
-      command: [sh, -c]
-      args: ["curl -vvv http://192.168.49.2:31112/function/insert-users -d {{inputs.parameters.data}}"]
+    - name: curly
+      container:
+        image: curlimages/curl:latest
+        command: [sh, -c]
+        args: ["curl -sq http://192.168.49.2:31112/function/users > /tmp/out.json"]
+      outputs:
+        parameters:
+        - name: user-list
+          valueFrom:
+            path: /tmp/out.json
+
+    - name: curly-data
+      inputs:
+        parameters:
+        - name: data
+      container:
+        image: curlimages/curl:latest
+        command: [sh, -c]
+        args: ["curl -vvv http://192.168.49.2:31112/function/insert-users -d {{inputs.parameters.data}}"]
