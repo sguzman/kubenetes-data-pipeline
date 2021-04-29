@@ -9,5 +9,6 @@ def handle(req):
         req (str): request body
     """
 
-    user = json.loads(req["user"])
+    js = json.loads(req)
+    user = js["user"]
     return duo_data.get_user(user)
