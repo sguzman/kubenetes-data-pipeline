@@ -10,4 +10,8 @@ functions:
     secrets:
       - duolingo-user
       - duolingo-pass
+    environment:
+      read_timeout: "1m"
+      write_timeout: "1m"
+      exec_timeout: "1m"
 

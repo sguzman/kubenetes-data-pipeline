@@ -1,7 +1,7 @@
 import json
 import os
 
-from lib import duo_data
+from .lib import duo_data
 
 def handle(req):
     """handle a request to the function
