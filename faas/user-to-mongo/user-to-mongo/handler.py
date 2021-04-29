@@ -11,7 +11,7 @@ def handle(req):
         host='mongodb.default.svc.cluster.local',
         port=27017,
         username='admin',
-        passwword='admin'
+        password='admin'
         )
     obj = json.loads(req)
     db.duolingo.dumps.insert_one(obj)
