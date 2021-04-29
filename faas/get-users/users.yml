@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://192.168.49.2:31112
+functions:
+  users:
+    lang: python3-debian
+    handler: ./users
+    image: guzmansalv/users:latest
+
