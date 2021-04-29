@@ -11,7 +11,7 @@ def handle(req):
             port=6379
             )
 
-    user: str = str(r.lpop('users'))
+    user = r.lpop('users').decode("utf-8") 
     js_obj = {
         "user": user
     }
