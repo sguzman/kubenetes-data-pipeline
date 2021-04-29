@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://192.168.49.2:31112
+functions:
+  duolingo-user-query:
+    lang: python3
+    handler: ./duolingo-user-query
+    image: guzmansalv/duolingo-user-query:latest
+
