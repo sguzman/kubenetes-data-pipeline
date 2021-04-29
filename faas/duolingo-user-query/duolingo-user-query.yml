@@ -7,4 +7,7 @@ functions:
     lang: python3
     handler: ./duolingo-user-query
     image: guzmansalv/duolingo-user-query:latest
+    secrets:
+      - duolingo-user
+      - duolingo-pass
 
