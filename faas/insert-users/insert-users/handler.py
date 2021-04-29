@@ -13,6 +13,7 @@ def handle(req):
 
     items = json.loads(req)
     for i in items:
+        print('inserting', i)
         r.rpush('users', i)
 
     return len(items)
