@@ -8,7 +8,7 @@ def handle(req):
     """
 
     db = pymongo.MongoClient(
-        host='redis-master.default.svc.cluster.local',
+        host='mongodb.default.svc.cluster.local',
         port=27017
         )
     obj = json.loads(req)
