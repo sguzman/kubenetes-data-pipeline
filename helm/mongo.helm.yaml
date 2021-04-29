@@ -3,7 +3,7 @@ image:
   debug: true
 archicture: standalone
 auth:
-  enabled: true
+  enabled: false
   rootPassword: admin
   username: admin
   password: admin
