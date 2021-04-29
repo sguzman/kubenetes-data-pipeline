@@ -11,8 +11,9 @@ def handle(req):
             port=6379
             )
 
-    user = str(r.lpop('users'))
-
-    return json.dumps({
+    user: str = str(r.lpop('users'))
+    js_obj = {
         "user": user
-    })
+    }
+
+    return json.dumps(js_obj)
