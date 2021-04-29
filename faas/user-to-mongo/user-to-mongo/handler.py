@@ -10,7 +10,7 @@ def handle(req):
     db = pymongo.MongoClient(
         host='mongodb.default.svc.cluster.local',
         port=27017,
-        username='admin',
+        username='root',
         password='admin'
         )
     obj = json.loads(req)
