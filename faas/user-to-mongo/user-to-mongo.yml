@@ -7,4 +7,8 @@ functions:
     lang: python3
     handler: ./user-to-mongo
     image: guzmansalv/user-to-mongo:latest
+    environment:
+      read_timeout: "1m"
+      write_timeout: "1m"
+      exec_timeout: "1m"
 
