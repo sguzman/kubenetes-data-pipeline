@@ -16,8 +16,8 @@ class DuoStuff:
 
     @staticmethod
     def login() -> None:
-        user = os.environ['USERNAME']
-        password = os.environ['PASSWORD']
+        user = open('/var/openfaas/secrets/duolingo-user').read().replace("\n", " ")
+        password = open('/var/openfaas/secrets/duolingo-pass').read().replace("\n", " ")
 
         lingo = duolingo.Duolingo(username=user, password=password)
         DuoStuff.duo_sess = lingo
