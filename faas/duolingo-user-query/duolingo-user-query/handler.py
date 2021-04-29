@@ -13,4 +13,4 @@ def handle(req):
     user = js["user"]
     obj = duo_data.get_user(user)
 
-    return json.dumps(obj)
+    return json.dumps(obj, indent=4, sort_keys=True, default=str)
