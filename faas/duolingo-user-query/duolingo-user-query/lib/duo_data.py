@@ -107,5 +107,3 @@ class User:
 def get_user(user):
     ws = User(user)
     return ws.all()
-
-get_user('its_me_sguzman')
