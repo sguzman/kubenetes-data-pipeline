@@ -1,3 +1,4 @@
+import json
 import pymongo
 
 def handle(req):
@@ -7,7 +8,8 @@ def handle(req):
     """
 
     db = pymongo.MongoClient(host='redis-master.default.svc.cluster.local', port=27017)
-    db.duolingo.dumps.insert_one(req)
+    obj = json.dumps(req)
+    db.duolingo.dumps.insert_one(obj)
     db.close()
 
-    return req
+    return len(req)
