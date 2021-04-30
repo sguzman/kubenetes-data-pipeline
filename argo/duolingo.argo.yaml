@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: duolingo-users
+spec:
+  entrypoint: A
+  templates:
+  - name: A
+    steps:
+    - - name: get-user
+        template: get-user-template
+
+    - - name: duo-query
+        template: duo-query-template
+        arguments:
+          parameters:
+            - name: duo-user
+              value: "{{steps.get-user.outputs.parameters.user}}"
+
+    - - name: mongo-insert
+        template: mongo-insert-template
+        arguments:
+          parameters:
+            - name: mongo-data
+              value: "{{steps.duo-query.outputs.parameters.duo-data}}"
+
+  - name: get-user-template
+    container:
+      image: curlimages/curl:latest
+      command: [sh, -c]
+      args: ["curl -sq http://192.168.49.2:31112/function/get-user-from-redis > /tmp/out.json"]
+    outputs:
+      parameters:
+      - name: user
+        valueFrom:
+          path: /tmp/out.json
+
+  - name: duo-query-template
+    inputs:
+      parameters:
+      - name: duo-user
+    container:
+      image: curlimages/curl:latest
+      command: [sh, -c]
+      args: ["curl -sq http://192.168.49.2:31112/function/insert-users -d '{{inputs.parameters.duo-user}}' > /tmp/data.json"]
+    outputs:
+      parameters:
+      - name: duo-data
+        valueFrom:
+          path: /tmp/data.json
+
+  - name: mongo-insert-template
+    inputs:
+      parameters:
+      - name: mongo-data
+    container:
+      image: curlimages/curl:latest
+      command: [sh, -c]
+      args: ["curl -vvv http://192.168.49.2:31112/function/user-to-mongo -d '{{inputs.parameters.mongo-data}}'"]
