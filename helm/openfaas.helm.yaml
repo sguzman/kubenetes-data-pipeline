@@ -1,0 +1,5 @@
+basic_auth: false
+gateway:
+  readTimeout : "5m"
+  writeTimeout : "5m"
+  upstreamTimeout : "1m"
