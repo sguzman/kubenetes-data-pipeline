@@ -10,19 +10,10 @@ postgresqlPostgresPassword: admin
 postgresqlExtendedConf:
     listenAddresses: "*"
     timezone: America/Los_Angeles
-volumePermissions:
-  enabled: true
-image:
-  debug: true
 pgHbaConfiguration: |-
     local all all trust    
     host all all all trust
     host all all all md5
-audit:
-  logHostname: true
-  logConnections: true
-  logDisconnections: true
-  logTimezone: America/Los_Angeles
 initdbScripts:
   01-init.sql: |-
     CREATE SCHEMA data;
@@ -38,14 +29,3 @@ initdbScripts:
     INSERT INTO duolingo.data.users (id, username) VALUES (323233417, 'its_me_sguzman');
 initdbUser: postgres
 initdbPassword: admin
-persistence:
-  #existingClaim: pvc-pg
-  size: 100Gi
-resources:
-  requests:
-    memory: 5024Mi
-    cpu: 1000m
-securityContext:
-    enabled: true
-    runAsUser: 0
-    fsGroup: 0
