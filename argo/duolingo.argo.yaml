@@ -28,7 +28,7 @@ spec:
     container:
       image: curlimages/curl:latest
       command: [sh, -c]
-      args: ["curl -sq http://192.168.49.2:31112/function/get-user-from-redis > /tmp/out.json"]
+      args: ["curl -sq http://gateway.default.svc.cluster.local:8080/function/get-user-from-redis > /tmp/out.json"]
     outputs:
       parameters:
       - name: user
@@ -42,7 +42,7 @@ spec:
     container:
       image: curlimages/curl:latest
       command: [sh, -c]
-      args: ["curl -sq http://192.168.49.2:31112/function/insert-users -d '{{inputs.parameters.duo-user}}' > /tmp/data.json"]
+      args: ["curl -sq http://gateway.default.svc.cluster.local:8080/function/insert-users -d '{{inputs.parameters.duo-user}}' > /tmp/data.json"]
     outputs:
       parameters:
       - name: duo-data
@@ -56,4 +56,4 @@ spec:
     container:
       image: curlimages/curl:latest
       command: [sh, -c]
-      args: ["curl -vvv http://192.168.49.2:31112/function/user-to-mongo -d '{{inputs.parameters.mongo-data}}'"]
+      args: ["curl -vvv http://gateway.default.svc.cluster.local:8080/function/user-to-mongo -d '{{inputs.parameters.mongo-data}}'"]
