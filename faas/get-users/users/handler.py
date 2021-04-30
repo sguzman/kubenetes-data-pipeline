@@ -9,7 +9,7 @@ def handle(req):
     """
     conn = psycopg2.connect(user="postgres",
                                   password="admin",
-                                  host="postgresql-1619549606.default.svc.cluster.local",
+                                  host="postgres-postgresql.default.svc.cluster.local",
                                   port="5432",
                                   database="duolingo")
 

@@ -28,7 +28,7 @@ spec:
       container:
         image: curlimages/curl:latest
         command: [sh, -c]
-        args: ["curl -sq http://192.168.49.2:31112/function/users > /tmp/out.json"]
+        args: ["curl -sq http://gateway.default.svc.cluster.local:8080/function/users > /tmp/out.json"]
       outputs:
         parameters:
         - name: user-list
@@ -44,6 +44,6 @@ spec:
         command: [curl]
         args:
         - "-vvv"
-        - "http://192.168.49.2:31112/function/insert-users"
+        - "http://gateway.default.svc.cluster.local:8080/function/insert-users"
         - "-d"
         - "{{inputs.parameters.data}}"
