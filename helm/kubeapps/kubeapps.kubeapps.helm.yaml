@@ -265,7 +265,7 @@ hooks:
 
 # Kubeops is an interface between the Kubeapps Dashboard and Helm 3/Kubernetes.
 kubeops:
-  replicaCount: 2
+  replicaCount: 1
   ## Add additional annotations to the kubeops pods
   ##
   podAnnotations: {}
@@ -484,7 +484,7 @@ postgresql:
   enabled: true
   ## Enable replication for high availability
   replication:
-    enabled: true
+    enabled: false
   ## Create a database for Kubeapps on the first run
   postgresqlDatabase: assets
   ## PostgreSQL password

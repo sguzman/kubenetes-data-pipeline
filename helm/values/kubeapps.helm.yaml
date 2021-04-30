@@ -1,0 +1,11 @@
+frontend:
+  replicaCount: 1
+kubeops:
+  replicaCount: 1
+assetsvc:
+  replicaCount: 1
+dashboard:
+  replicaCount: 1
+postgresql:
+  replication:
+    enabled: false
