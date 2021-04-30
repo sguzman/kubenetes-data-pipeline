@@ -7,7 +7,7 @@ def handle(req):
         req (str): request body
     """
     r = redis.Redis(
-            host='redis-master.default.svc.cluster.local',
+            host='redis-redis-master.default.svc.cluster.local',
             port=6379
             )
 
