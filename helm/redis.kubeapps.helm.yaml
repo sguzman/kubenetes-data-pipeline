@@ -9,27 +9,26 @@
 ## @param global.redis.password Global Redis(TM) password (overrides `auth.password`)
 ##
 global:
-  imageRegistry:
+  imageRegistry: 
   ## E.g.
   ## imagePullSecrets:
   ##   - myRegistryKeySecretName
   ##
   imagePullSecrets: []
-  storageClass:
+  storageClass: 
   redis:
-    password:
+    ? password
 
 ## @section Common parameters
-
 ## @param kubeVersion Override Kubernetes version
 ##
-kubeVersion:
+kubeVersion: 
 ## @param nameOverride String to partially override common.names.fullname
 ##
-nameOverride:
+nameOverride: 
 ## @param fullnameOverride String to fully override common.names.fullname
 ##
-fullnameOverride:
+fullnameOverride: 
 ## @param commonLabels Labels to add to all deployed objects
 ##
 commonLabels: {}
@@ -44,7 +43,6 @@ clusterDomain: cluster.local
 extraDeploy: []
 
 ## @section Redis(TM) Image parameters
-
 ## Bitnami Redis(TM) image
 ## ref: https://hub.docker.com/r/bitnami/redis/tags/
 ## @param image.registry Redis(TM) image registry
@@ -77,17 +75,16 @@ image:
 
 ## @section Redis(TM) common configuration parameters
 ## https://github.com/bitnami/bitnami-docker-redis#configuration
-
 ## @param architecture Redis(TM) architecture. Allowed values: `standalone` or `replication`
 ##
-architecture: replication
+architecture: standalone
 ## Redis(TM) Authentication parameters
 ## ref: https://github.com/bitnami/bitnami-docker-redis#setting-the-server-password-on-first-run
 ##
 auth:
   ## @param auth.enabled Enable password authentication
   ##
-  enabled: true
+  enabled: false
   ## @param auth.sentinel Enable password authentication on sentinels too
   ##
   sentinel: true
@@ -98,11 +95,11 @@ auth:
   ## @param auth.existingSecret The name of an existing secret with Redis(TM) credentials
   ## NOTE: When it's set, the previous `auth.password` parameter is ignored
   ##
-  existingSecret:
+  existingSecret: 
   ## @param auth.existingSecretPasswordKey Password key to be retrieved from existing secret
   ## NOTE: ignored unless `auth.existingSecret` parameter is set
   ##
-  existingSecretPasswordKey:
+  existingSecretPasswordKey: 
   ## @param auth.usePasswordFiles Mount credentials as files instead of using an environment variable
   ##
   usePasswordFiles: false
@@ -116,15 +113,14 @@ commonConfiguration: |-
   save ""
 ## @param existingConfigmap The name of an existing ConfigMap with your custom configuration for Redis(TM) nodes
 ##
-existingConfigmap:
+existingConfigmap: 
 
 ## @section Redis(TM) master configuration parameters
-
 master:
   ## @param master.configuration Configuration for Redis(TM) master nodes
   ## ref: https://redis.io/topics/config
   ##
-  configuration:
+  configuration: 
   ## @param master.disableCommands [array] Array with Redis(TM) commands to disable on master nodes
   ## Commands will be completely disabled by renaming each to an empty string.
   ## ref: https://redis.io/topics/security#disabling-of-specific-commands
@@ -157,10 +153,10 @@ master:
   extraEnvVars: []
   ## @param master.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for Redis(TM) master nodes
   ##
-  extraEnvVarsCM:
+  extraEnvVarsCM: 
   ## @param master.extraEnvVarsSecret Name of existing Secret containing extra env vars for Redis(TM) master nodes
   ##
-  extraEnvVarsSecret:
+  extraEnvVarsSecret: 
   ## @param master.containerPort Container port to open on Redis(TM) master nodes
   ##
   containerPort: 6379
@@ -227,7 +223,7 @@ master:
   ## @param master.schedulerName Alternate scheduler for Redis(TM) master pods
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
   ##
-  schedulerName:
+  schedulerName: 
   ## @param master.updateStrategy.type Redis(TM) master statefulset strategy type
   ## @skip master.updateStrategy.rollingUpdate
   ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
@@ -340,7 +336,7 @@ master:
   persistence:
     ## @param master.persistence.enabled Enable persistence on Redis(TM) master nodes using Persistent Volume Claims
     ##
-    enabled: true
+    enabled: false
     ## @param master.persistence.path The path the volume will be mounted at on Redis(TM) master containers
     ## NOTE: Useful when using different Redis(TM) images
     ##
@@ -354,7 +350,7 @@ master:
     ## If set to "-", storageClassName: "", which disables dynamic provisioning
     ## If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner
     ##
-    storageClass:
+    storageClass: 
     ## @param master.persistence.accessModes [array] Persistent Volume access modes
     ##
     accessModes:
@@ -375,7 +371,7 @@ master:
     ## @param master.persistence.existingClaim Use a existing PVC which must be created manually before bound
     ## NOTE: requires master.persistence.enabled: true
     ##
-    existingClaim:
+    existingClaim: 
   ## Redis(TM) master service parameters
   ##
   service:
@@ -389,18 +385,18 @@ master:
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
     ## NOTE: choose port between <30000-32767>
     ##
-    nodePort:
+    nodePort: 
     ## @param master.service.externalTrafficPolicy Redis(TM) master service external traffic policy
     ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
     ##
     externalTrafficPolicy: Cluster
     ## @param master.service.clusterIP Redis(TM) master service Cluster IP
     ##
-    clusterIP:
+    clusterIP: 
     ## @param master.service.loadBalancerIP Redis(TM) master service Load Balancer IP
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
     ##
-    loadBalancerIP:
+    loadBalancerIP: 
     ## @param master.service.loadBalancerSourceRanges Redis(TM) master service Load Balancer sources
     ## https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
     ## e.g.
@@ -416,7 +412,6 @@ master:
   terminationGracePeriodSeconds: 30
 
 ## @section Redis(TM) replicas configuration parameters
-
 replica:
   ## @param replica.replicaCount Number of Redis(TM) replicas to deploy
   ##
@@ -424,7 +419,7 @@ replica:
   ## @param replica.configuration Configuration for Redis(TM) replicas nodes
   ## ref: https://redis.io/topics/config
   ##
-  configuration:
+  configuration: 
   ## @param replica.disableCommands [array] Array with Redis(TM) commands to disable on replicas nodes
   ## Commands will be completely disabled by renaming each to an empty string.
   ## ref: https://redis.io/topics/security#disabling-of-specific-commands
@@ -457,10 +452,10 @@ replica:
   extraEnvVars: []
   ## @param replica.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for Redis(TM) replicas nodes
   ##
-  extraEnvVarsCM:
+  extraEnvVarsCM: 
   ## @param replica.extraEnvVarsSecret Name of existing Secret containing extra env vars for Redis(TM) replicas nodes
   ##
-  extraEnvVarsSecret:
+  extraEnvVarsSecret: 
   ## @param replica.containerPort Container port to open on Redis(TM) replicas nodes
   ##
   containerPort: 6379
@@ -527,7 +522,7 @@ replica:
   ## @param replica.schedulerName Alternate scheduler for Redis(TM) replicas pods
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
   ##
-  schedulerName:
+  schedulerName: 
   ## @param replica.updateStrategy.type Redis(TM) replicas statefulset strategy type
   ## @skip replica.updateStrategy.rollingUpdate
   ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
@@ -654,7 +649,7 @@ replica:
     ## If set to "-", storageClassName: "", which disables dynamic provisioning
     ## If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner
     ##
-    storageClass:
+    storageClass: 
     ## @param replica.persistence.accessModes [array] Persistent Volume access modes
     ##
     accessModes:
@@ -685,18 +680,18 @@ replica:
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
     ## NOTE: choose port between <30000-32767>
     ##
-    nodePort:
+    nodePort: 
     ## @param replica.service.externalTrafficPolicy Redis(TM) replicas service external traffic policy
     ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
     ##
     externalTrafficPolicy: Cluster
     ## @param replica.service.clusterIP Redis(TM) replicas service Cluster IP
     ##
-    clusterIP:
+    clusterIP: 
     ## @param replica.service.loadBalancerIP Redis(TM) replicas service Load Balancer IP
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
     ##
-    loadBalancerIP:
+    loadBalancerIP: 
     ## @param replica.service.loadBalancerSourceRanges Redis(TM) replicas service Load Balancer sources
     ## https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
     ## e.g.
@@ -712,7 +707,6 @@ replica:
   terminationGracePeriodSeconds: 30
 
 ## @section Redis(TM) Sentinel configuration parameters
-
 sentinel:
   ## @param sentinel.enabled Use Redis(TM) Sentinel on Redis(TM) pods.
   ## IMPORTANT: this will disable the master and replicas services and
@@ -773,7 +767,7 @@ sentinel:
   ## @param sentinel.configuration Configuration for Redis(TM) Sentinel nodes
   ## ref: https://redis.io/topics/sentinel
   ##
-  configuration:
+  configuration: 
   ## @param sentinel.command Override default container command (useful when using custom images)
   ##
   command: []
@@ -865,19 +859,19 @@ sentinel:
     ## NOTE: choose port between <30000-32767>
     ##
     nodePorts:
-      redis:
-      sentinel:
+      ? redis
+      ? sentinel
     ## @param sentinel.service.externalTrafficPolicy Redis(TM) Sentinel service external traffic policy
     ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
     ##
     externalTrafficPolicy: Cluster
     ## @param sentinel.service.clusterIP Redis(TM) Sentinel service Cluster IP
     ##
-    clusterIP:
+    clusterIP: 
     ## @param sentinel.service.loadBalancerIP Redis(TM) Sentinel service Load Balancer IP
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
     ##
-    loadBalancerIP:
+    loadBalancerIP: 
     ## @param sentinel.service.loadBalancerSourceRanges Redis(TM) Sentinel service Load Balancer sources
     ## https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
     ## e.g.
@@ -893,7 +887,6 @@ sentinel:
   terminationGracePeriodSeconds: 30
 
 ## @section Other Parameters
-
 ## Network Policy configuration
 ## ref: https://kubernetes.io/docs/concepts/services-networking/network-policies/
 ##
@@ -996,7 +989,7 @@ pdb:
   minAvailable: 1
   ## @param pdb.maxUnavailable Max number of pods that can be unavailable after the eviction
   ##
-  maxUnavailable:
+  maxUnavailable: 
 ## TLS configuration
 ##
 tls:
@@ -1008,22 +1001,21 @@ tls:
   authClients: true
   ## @param tls.certificatesSecret Then name of the existing secret that contains the TLS certificates
   ##
-  certificatesSecret:
+  certificatesSecret: 
   ## @param tls.certFilename Certificate filename
   ##
-  certFilename:
+  certFilename: 
   ## @param tls.certKeyFilename Certificate Key filename
   ##
-  certKeyFilename:
+  certKeyFilename: 
   ## @param tls.certCAFilename CA Certificate filename
   ##
-  certCAFilename:
+  certCAFilename: 
   ## @param tls.dhParamsFilename File containing DH params (in order to support DH based ciphers)
   ##
-  dhParamsFilename:
+  dhParamsFilename: 
 
 ## @section Metrics Parameters
-
 metrics:
   ## @param metrics.enabled Start a sidecar prometheus exporter to expose Redis(TM) metrics
   ##
@@ -1198,13 +1190,13 @@ metrics:
     enabled: false
     ## @param metrics.serviceMonitor.namespace The namespace in which the ServiceMonitor will be created
     ##
-    namespace:
+    namespace: 
     ## @param metrics.serviceMonitor.interval The interval at which metrics should be scraped
     ##
     interval: 30s
     ## @param metrics.serviceMonitor.scrapeTimeout The timeout after which the scrape is ended
     ##
-    scrapeTimeout:
+    scrapeTimeout: 
     ## @param metrics.serviceMonitor.relabellings Metrics relabellings to add to the scrape endpoint
     ##
     relabellings: []
@@ -1223,7 +1215,7 @@ metrics:
     enabled: false
     ## @param metrics.prometheusRule.namespace The namespace in which the prometheusRule will be created
     ##
-    namespace:
+    namespace: 
     ## @param metrics.prometheusRule.additionalLabels Additional labels for the prometheusRule
     ##
     additionalLabels: {}
@@ -1265,7 +1257,6 @@ metrics:
     rules: []
 
 ## @section Init Container Parameters
-
 ## 'volumePermissions' init container parameters
 ## Changes the owner and group of the persistent volume mount point to runAsUser:fsGroup values
 ##   based on the *podSecurityContext/*containerSecurityContext parameters
